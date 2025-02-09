@@ -252,3 +252,53 @@ document.getElementById('searchInput').addEventListener('input', function() {
         }
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const cart = document.querySelector(".cart-icon");
+    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+    const cartItemsContainer = document.querySelector(".cart-items");
+
+    addToCartButtons.forEach((button) => {
+        button.addEventListener("click", function (event) {
+            const product = event.target.closest(".product");
+            const productName = product.querySelector(".product-name").textContent;
+            
+            // Створюємо літачок
+            const flyer = document.createElement("div");
+            flyer.classList.add("flyer");
+            document.body.appendChild(flyer);
+            
+            // Отримуємо позиції кнопки та кошика
+            const buttonRect = button.getBoundingClientRect();
+            const cartRect = cart.getBoundingClientRect();
+
+            flyer.style.left = `${buttonRect.left + window.scrollX}px`;
+            flyer.style.top = `${buttonRect.top + window.scrollY}px`;
+            
+            // Додаємо анімацію
+            flyer.animate(
+                [
+                    { transform: `translate(0, 0)`, opacity: 1 },
+                    { transform: `translate(${cartRect.left - buttonRect.left}px, ${cartRect.top - buttonRect.top}px)`, opacity: 0 }
+                ],
+                {
+                    duration: 1000,
+                    easing: "ease-in-out",
+                    fill: "forwards"
+                }
+            ).onfinish = function () {
+                flyer.remove();
+                addToCart(productName);
+            };
+        });
+    });
+
+    function addToCart(productName) {
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
+        cartItem.textContent = productName;
+        cartItemsContainer.appendChild(cartItem);
+    }
+});
+
