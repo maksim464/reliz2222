@@ -1,0 +1,150 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Шапка */
+header {
+    background-color: green;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.search input {
+    background-color: white;
+    height: 25px;
+    width: 250px;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+}
+
+.cart-button {
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Сітка товарів */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* Товари */
+.div1 {
+    background-color: lightblue;
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.div1 img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.div1:hover img {
+    transform: scale(1.05);
+}
+
+.div1 span {
+    display: block;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.div1 button {
+    margin-top: 10px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+/* Панель кошика */
+.cart-panel {
+    /* position: fixed;
+    z-index: 10;
+    right: -300px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    transition: 0.3s;
+    padding: 10px;
+    overflow-y: auto; */
+    position: fixed;
+    top: 10%;
+    right: 5%;
+    z-index: 3;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+
+}
+
+.cart-panel.open {
+    right: 0;
+}
+
+/* Модальне вікно */
+.fullscreen-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+   
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+}
