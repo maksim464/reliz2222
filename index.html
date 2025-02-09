@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин активного відпочинку</title>
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="./script.js"></script>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="search">
+            <input type="search" placeholder="Пошук...">
+        </div>
+        <div class="cart">
+            <button class="cart-button" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</button>
+            <!-- Панель кошика -->
+<div id="cart-panel" class="cart-panel">
+    <h2>Ваш кошик</h2>
+    <ul id="cart-items"></ul>
+    <button onclick="clearCart()">Очистити кошик</button>
+    <button onclick="toggleCart()">Закрити</button>
+</div>
+        </div>
+    </nav>
+</header>
+
+<main></main>
+
+
+
+<!-- Модальне вікно для перегляду фото -->
+<div id="fullscreen-modal" class="fullscreen-modal">
+    <div class="modal-content">
+        <img id="fullscreen-img" src="" alt="">
+        <h2 id="product-title"></h2>
+        <p id="product-description"></p>
+        <button onclick="closeFullscreen()">Закрити</button>
+    </div>
+</div>
+
+<footer></footer>
+
+
+</body>
+</html>
