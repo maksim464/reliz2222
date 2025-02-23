@@ -289,23 +289,7 @@ nav ul li a:hover {
     animation: fadeIn 1s ease-out;
 }
 
-/* Footer */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
-    transition: background-color 0.3s ease;
-}
 
-footer:hover {
-    background-color: #555;
-}
-
-footer p {
-    margin: 0;
-}
 
 /* Image Gallery */
 .gallery-container {
