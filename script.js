@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", setupCartModal);
 function showPaymentAnimation() {
     let cartPanel = document.getElementById("cart-panel");
     cartPanel.innerHTML = "<h2>⏳ Обробка платежу...</h2>";
+    
     let loader = document.createElement("div");
     loader.classList.add("loader");
     loader.style.width = "50px";
@@ -133,7 +134,7 @@ function showPaymentAnimation() {
         setTimeout(() => {
             cartPanel.style.display = "none";
             document.getElementById("overlay").style.display = "none";
-            clearCart();
+            clearCart(); // Винесено за межі `setTimeout`
         }, 5000);
     }, 5000);
 }
