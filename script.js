@@ -103,46 +103,6 @@ function setupCartModal() {
 
 document.addEventListener("DOMContentLoaded", setupCartModal);
 
-// Функція для візуалізації процесу оплати
-function showPaymentAnimation() {
-    let cartPanel = document.getElementById("cart-panel");
-    cartPanel.innerHTML = "<h2>⏳ Обробка платежу...</h2>";
-    
-    let loader = document.createElement("div");
-    loader.classList.add("loader");
-    loader.style.width = "50px";
-    loader.style.height = "50px";
-    loader.style.border = "5px solid #fff";
-    loader.style.borderTop = "5px solid transparent";
-    loader.style.borderRadius = "50%";
-    loader.style.animation = "spin 1s linear infinite";
-    loader.style.margin = "20px auto";
-    cartPanel.appendChild(loader);
-    
-    let catGif = document.createElement("img");
-    catGif.src = "https://i.gifer.com/ZVmP.gif";
-    catGif.style.width = "200px";
-    catGif.style.marginTop = "15px";
-    cartPanel.appendChild(catGif);
-    
-    setTimeout(() => {
-        cartPanel.innerHTML = "<h2>✅ Оплата успішна! Дякуємо за покупку! 🎉</h2>";
-        cartPanel.style.background = "#4CAF50";
-        cartPanel.style.color = "#fff";
-        cartPanel.appendChild(catGif);
-        
-        setTimeout(() => {
-            cartPanel.style.display = "none";
-            document.getElementById("overlay").style.display = "none";
-            clearCart(); // Винесено за межі `setTimeout`
-        }, 5000);
-    }, 5000);
-}
-
-// Додаємо анімацію для спінера
-let style = document.createElement("style");
-style.innerHTML = "@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }";
-document.head.appendChild(style);
 
 
 // Функція для відкриття збільшеного фото товару
