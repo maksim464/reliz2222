@@ -288,3 +288,200 @@ document.getElementById("payment-form").addEventListener("submit", function (e) 
     closePaymentModal();
 });
 
+
+function updateCartUI() {
+    let cartList = document.getElementById("cart-items");
+    let cartCount = document.getElementById("cart-count");
+    let checkoutBtn = document.getElementById("checkout-btn");
+    
+    cartList.innerHTML = "";
+    
+    cart.forEach((item, index) => {
+        let li = document.createElement("li");
+        li.textContent = item;
+        li.classList.add("cart-item");
+        li.style.fontSize = "18px";
+        li.style.marginBottom = "15px";
+        li.style.padding = "10px";
+        li.style.borderRadius = "10px";
+        li.style.backgroundColor = "#f9f9f9";
+        li.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+        
+        let removeBtn = document.createElement("button");
+        removeBtn.textContent = "❌";
+        removeBtn.classList.add("remove-btn");
+        removeBtn.style.marginLeft = "10px";
+        removeBtn.style.backgroundColor = "#ff6347";
+        removeBtn.style.color = "#fff";
+        removeBtn.style.border = "none";
+        removeBtn.style.padding = "5px 10px";
+        removeBtn.style.borderRadius = "8px";
+        removeBtn.style.cursor = "pointer";
+        removeBtn.style.transition = "background-color 0.3s ease";
+        
+        removeBtn.onclick = function () {
+            removeFromCart(index);
+        };
+        
+        removeBtn.onmouseover = function () {
+            removeBtn.style.backgroundColor = "#ff4500";
+        };
+        
+        removeBtn.onmouseout = function () {
+            removeBtn.style.backgroundColor = "#ff6347";
+        };
+        
+        li.appendChild(removeBtn);
+        cartList.appendChild(li);
+    });
+
+    cartCount.textContent = cart.length;
+    checkoutBtn.style.display = cart.length > 0 ? "block" : "none";
+}
+
+// Стилізація кнопки оформлення замовлення
+function setupCartModal() {
+    let overlay = document.createElement("div");
+    overlay.id = "overlay";
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
+    overlay.style.backdropFilter = "blur(8px)";
+    overlay.style.display = "none";
+    overlay.style.zIndex = "999";
+    overlay.onclick = toggleCart;
+    document.body.appendChild(overlay);
+
+    let cartPanel = document.getElementById("cart-panel");
+    cartPanel.style.position = "fixed";
+    cartPanel.style.top = "50%";
+    cartPanel.style.left = "50%";
+    cartPanel.style.transform = "translate(-50%, -50%)";
+    cartPanel.style.background = "linear-gradient(135deg, #ff9a9e, #fad0c4)";
+    cartPanel.style.padding = "25px";
+    cartPanel.style.borderRadius = "20px";
+    cartPanel.style.boxShadow = "0 15px 30px rgba(0, 0, 0, 0.4)";
+    cartPanel.style.display = "none";
+    cartPanel.style.zIndex = "1000";
+    cartPanel.style.width = "450px";
+    cartPanel.style.textAlign = "center";
+    cartPanel.style.color = "#fff";
+    cartPanel.style.fontFamily = "Arial, sans-serif";
+    cartPanel.style.transition = "transform 0.3s ease";
+
+    let checkoutBtn = document.createElement("button");
+    checkoutBtn.id = "checkout-btn";
+    checkoutBtn.textContent = "🚀 Оформити замовлення";
+    checkoutBtn.style.display = "none";
+    checkoutBtn.classList.add("checkout-btn");
+    checkoutBtn.style.fontSize = "18px";
+    checkoutBtn.style.padding = "12px 30px";
+    checkoutBtn.style.marginTop = "20px";
+    checkoutBtn.style.border = "none";
+    checkoutBtn.style.backgroundColor = "#28a745";
+    checkoutBtn.style.color = "#fff";
+    checkoutBtn.style.cursor = "pointer";
+    checkoutBtn.style.transition = "background-color 0.3s ease";
+    
+    checkoutBtn.onmouseover = function () {
+        checkoutBtn.style.backgroundColor = "#218838";
+    };
+    
+    checkoutBtn.onmouseout = function () {
+        checkoutBtn.style.backgroundColor = "#28a745";
+    };
+    
+    checkoutBtn.onclick = showPaymentAnimation;
+    cartPanel.appendChild(checkoutBtn);
+}
+
+// Стилізація продуктів
+function displayProducts() {
+    const productsContainer = document.getElementById("products-container");
+    productsContainer.innerHTML = ''; // clear container
+
+    products.forEach(category => {
+        const categoryTitle = document.createElement("h2");
+        categoryTitle.textContent = category.category;
+        categoryTitle.style.fontSize = "24px";
+        categoryTitle.style.marginBottom = "15px";
+        categoryTitle.style.color = "#333";
+        
+        productsContainer.appendChild(categoryTitle);
+
+        category.items.forEach(item => {
+            const productCard = document.createElement("div");
+            productCard.style.display = "inline-block";
+            productCard.style.width = "200px";
+            productCard.style.margin = "10px";
+            productCard.style.padding = "15px";
+            productCard.style.borderRadius = "10px";
+            productCard.style.backgroundColor = "#f9f9f9";
+            productCard.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.1)";
+            productCard.style.textAlign = "center";
+            productCard.style.cursor = "pointer";
+            productCard.style.transition = "transform 0.2s ease";
+
+            productCard.onmouseover = function () {
+                productCard.style.transform = "scale(1.05)";
+            };
+
+            productCard.onmouseout = function () {
+                productCard.style.transform = "scale(1)";
+            };
+
+            const productImage = document.createElement("img");
+            productImage.src = item.img;
+            productImage.alt = item.name;
+            productImage.style.width = "100%";
+            productImage.style.borderRadius = "10px";
+
+            const productName = document.createElement("h3");
+            productName.textContent = item.name;
+            productName.style.fontSize = "18px";
+            productName.style.margin = "10px 0";
+            productName.style.color = "#333";
+            
+            const productDesc = document.createElement("p");
+            productDesc.textContent = item.desc;
+            productDesc.style.fontSize = "14px";
+            productDesc.style.color = "#777";
+            productDesc.style.marginBottom = "15px";
+
+            const addToCartBtn = document.createElement("button");
+            addToCartBtn.textContent = "🛒 Додати до кошика";
+            addToCartBtn.style.backgroundColor = "#007bff";
+            addToCartBtn.style.color = "#fff";
+            addToCartBtn.style.padding = "10px 20px";
+            addToCartBtn.style.border = "none";
+            addToCartBtn.style.borderRadius = "8px";
+            addToCartBtn.style.cursor = "pointer";
+            addToCartBtn.style.transition = "background-color 0.3s ease";
+
+            addToCartBtn.onmouseover = function () {
+                addToCartBtn.style.backgroundColor = "#0056b3";
+            };
+            
+            addToCartBtn.onmouseout = function () {
+                addToCartBtn.style.backgroundColor = "#007bff";
+            };
+
+            addToCartBtn.onclick = function () {
+                addToCart(item.name);
+            };
+
+            productCard.appendChild(productImage);
+            productCard.appendChild(productName);
+            productCard.appendChild(productDesc);
+            productCard.appendChild(addToCartBtn);
+            
+            productsContainer.appendChild(productCard);
+        });
+    });
+}
+
+// Call displayProducts to show products when the page loads
+document.addEventListener("DOMContentLoaded", displayProducts);
