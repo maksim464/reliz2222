@@ -4,6 +4,14 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
 }
 
 /* Шапка (Header) */
@@ -24,6 +32,7 @@ header h1 {
     font-weight: 700;
 }
 
+/* Search Input */
 .search input {
     background-color: white;
     height: 35px;
@@ -33,12 +42,13 @@ header h1 {
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
-    transition: 0.3s ease;
+    transition: width 0.3s ease, border-color 0.3s ease;
 }
 
 .search input:focus {
     border-color: #2d6a4f;
     outline: none;
+    width: 300px;
 }
 
 /* Cart button styles */
@@ -55,12 +65,13 @@ header h1 {
     border-radius: 5px;
     font-size: 16px;
     color: #2d6a4f;
-    transition: 0.3s ease;
+    transition: 0.3s ease, transform 0.3s ease;
 }
 
 .cart-button:hover {
     background-color: #2d6a4f;
     color: white;
+    transform: scale(1.1);
 }
 
 /* Grid of products */
@@ -86,7 +97,7 @@ header h1 {
 }
 
 .div1:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -98,7 +109,7 @@ header h1 {
 }
 
 .div1:hover img {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .div1 span {
@@ -123,6 +134,17 @@ header h1 {
 
 .div1 button:hover {
     background-color: #1f4d38;
+}
+
+.div1 a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.div1 a:hover {
+    color: #2d6a4f;
 }
 
 /* Cart Panel */
@@ -194,6 +216,11 @@ header h1 {
     backdrop-filter: blur(5px);
 }
 
+.fullscreen-modal.open {
+    display: flex;
+    opacity: 1;
+}
+
 .modal-content {
     background: #fff;
     padding: 30px;
@@ -202,6 +229,12 @@ header h1 {
     max-width: 450px;
     width: 90%;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50px);
+    transition: transform 0.3s ease-out;
+}
+
+.fullscreen-modal.open .modal-content {
+    transform: translateY(0);
 }
 
 .modal-content img {
@@ -277,7 +310,55 @@ footer {
     padding: 15px 0;
     text-align: center;
     font-size: 16px;
-    position: relative;
+    position: absolute;
     bottom: 0;
     width: 100%;
+    margin-top: auto;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2d6a4f;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #1f4d38;
+}
+
+/* Responsive Layout Enhancements */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .div1 {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    .search input {
+        width: 200px;
+    }
+
+    .cart-button {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .search input {
+        width: 150px;
+    }
 }
