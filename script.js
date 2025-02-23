@@ -262,4 +262,29 @@ document.addEventListener("DOMContentLoaded", function () {
         cartItemsContainer.appendChild(cartItem);
     }
 });
+// Show the payment modal when clicking on the checkout button
+function showPaymentAnimation() {
+    let cartPanel = document.getElementById("cart-panel");
+    let overlay = document.getElementById("overlay");
+    let paymentModal = document.getElementById("payment-modal");
+    
+    cartPanel.style.display = "none";  // Close the cart
+    overlay.style.display = "none";    // Hide the overlay
+    
+    // Display the payment modal
+    paymentModal.style.display = "block";
+}
+
+// Close the payment modal
+function closePaymentModal() {
+    let paymentModal = document.getElementById("payment-modal");
+    paymentModal.style.display = "none";
+}
+
+// Handle payment form submission (just for demonstration)
+document.getElementById("payment-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    alert("Оплата виконана! Дякуємо за покупку!");
+    closePaymentModal();
+});
 
