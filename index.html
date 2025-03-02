@@ -9,104 +9,96 @@
 </head>
 <body>
 
-<header>
-    <nav>
-        <div class="search">
-            <input type="search" placeholder="Пошук...">
+    <header>
+        <nav>
+            <div class="search">
+                <input id="search" type="search" placeholder="Пошук...">
+            </div>
+            <div class="navigation">
+                <a href="#about">
+                    Про нас
+                </a>
+                <a href="#products-container">Товари</a>
+                <a href="#delivery">Доставка</a>
+                <a href="#contacts">Контакти</a>
+            </div>
+            <div class="cart">
+                <button class="cart-button" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</button>
+                
+                <div id="cart-panel" class="cart-panel">
+                    <h2>Ваш кошик</h2>
+                    <ul id="cart-items"></ul>
+                    <button onclick="clearCart()">Очистити кошик</button>
+                    <button onclick="toggleCart()">Закрити</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="info-section">
+            <div id="about" class="info-block">
+                <h2>Про нас</h2>
+                <p>Ми - магазин активного відпочинку, який пропонує якісне спорядження для туризму, альпінізму та активного способу життя. Наші товари допоможуть вам насолоджуватися природою з комфортом.</p>
+            </div>
+          
+        <div id="products-container"></div>
+        <div id="delivery" class="info-block">
+            <h2>Умови доставки</h2>
+            <p>Доставка по всій Україні здійснюється протягом 1-3 днів. Ми пропонуємо безкоштовну доставку для замовлень від 1000 грн. Також доступний самовивіз з нашого магазину.</p>
         </div>
-        <div class="cart">
-            <button class="cart-button" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</button>
-            <!-- Панель кошика -->
-<div id="cart-panel" class="cart-panel">
-    <h2>Ваш кошик</h2>
-    <ul id="cart-items"></ul>
-    <button onclick="clearCart()">Очистити кошик</button>
-    <button onclick="toggleCart()">Закрити</button>
-</div>
+        <div id="contacts" class="info-block">
+            <h2>Контакти</h2>
+            <p>Зв'яжіться з нами за телефоном: <strong>+380 123 456 789</strong> або напишіть на email: <strong>info@active-shop.com</strong>. Ми працюємо щодня з 9:00 до 18:00.</p>
         </div>
-    </nav>
-</header>
-
-<main></main>
-
-
-
-<!-- Модальне вікно для перегляду фото -->
-<div id="fullscreen-modal" class="fullscreen-modal">
-    <div class="modal-content">
-        <img id="fullscreen-img" src="" alt="">
-        <h2 id="product-title"></h2>
-        <p id="product-description"></p>
-        <button onclick="closeFullscreen()">Закрити</button>
-    </div>
-</div>
- <!-- Add this to your HTML -->
-
-<!-- Payment Modal -->
-<div id="payment-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closePaymentModal()">×</span>
-        <h2>Оформити замовлення</h2>
-        <p>Виберіть спосіб оплати:</p>
+    </section>
         
-        <!-- Payment options -->
-        <form id="payment-form">
-            <input type="text" placeholder="Ваше ім'я" required><br>
-            <input type="text" placeholder="Номер картки" required><br>
-            <input type="date" placeholder="Дата закінчення" required><br>
-            <input type="text" placeholder="CVV" required><br>
-            
-            <button type="submit" class="pay-btn">Платити</button>
-        </form>
-    </div>
+    </main>
+
+<div id="loader" class="loader">
+    <h2>Оплата</h2>
+    
+
+    <img src=" https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWt0aGFsajF2ZGZ3cjVuOGdod2hydHZmOWtnOWRoZGI2M3R2dW5haiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BK1EfIsdkKZMY/giphy.gif" alt="Loading...">
+   
 </div>
 
-<!-- Styles for the payment modal -->
-<style>
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 9999;
-    }
-    .modal-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        width: 400px;
-        text-align: center;
-    }
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 25px;
-        cursor: pointer;
-    }
-    .pay-btn {
-        padding: 10px 20px;
-        background-color: #ff9a9e;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-    }
-    .pay-btn:hover {
-        background-color: #ff6f77;
-    }
-</style>
 
-<footer></footer>
+<div id="order-success" class="order-success">
+    <h2>Дякуємо за замовлення!</h2>
+    <p>Ваше замовлення успішно оформлено. Ми зв'яжемося з вами найближчим часом.</p>
+    <button onclick="closeOrderSuccess()">Закрити</button>
+</div>
+    
+    <div id="fullscreen-modal" class="fullscreen-modal">
+        <div class="modal-content">
+            <img id="fullscreen-img" src="" alt="">
+            <h2 id="product-title"></h2>
+            <p id="product-description"></p>
+            <button onclick="closeFullscreen()">Закрити</button>
+        </div>
+    </div>
 
+    
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePaymentModal()">×</span>
+            <h2>Оформити замовлення</h2>
+            <p>Виберіть спосіб оплати:</p>
+            
+            
+            <form id="payment-form">
+                <input type="text" placeholder="Ваше ім'я" required><br>
+                <input type="text" placeholder="Номер картки" required><br>
+                <input type="date" placeholder="Дата закінчення" required><br>
+                <input type="text" placeholder="CVV" required><br>
+                
+                <button type="submit" class="pay-btn">Платити</button>
+            </form>
+        </div>
+    </div>
+
+    <footer></footer>
 
 </body>
 </html>
